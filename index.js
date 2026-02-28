@@ -7,7 +7,8 @@ const CHAT_ID = "1538316710";
 const URL = "https://official-tickets.roadtoqatar.qa/qatar-football-festival/select/2742971?hl=ar-QA&cp_landing=cta_hero&cp_landing_term=cta_hero&cp_landing_source=tickets.roadtoqatar&utm_source=direct&viewCode=Vista_Principal";
 
 // الكلمة اللي يبحث عنها داخل الصفحة
-const KEYWORD = "Available";
+const KEYWORD = "Sale
+  ";
 
 let alreadySent = false;
 
@@ -32,4 +33,5 @@ async function checkTickets() {
 }
 
 // يفحص كل دقيقة
+
 setInterval(checkTickets, 60000);
