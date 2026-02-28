@@ -1,12 +1,11 @@
 {
-  "name": "ticket-bot-pro",
+  "name": "ticket-bot",
   "version": "1.0.0",
-  "main": "server.js",
-  "dependencies": {
-    "axios": "^1.6.0",
-    "node-telegram-bot-api": "^0.64.0"
-  },
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
   }
 }
