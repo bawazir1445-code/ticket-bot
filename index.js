@@ -3,28 +3,34 @@ const axios = require("axios");
 const TOKEN = "HTTP API:
 8714031556:AAF4iYEfhMTlBPGeSF3NPe-GUSCqZg3-NLJE";
 const CHAT_ID = "1538316710";
-const URL = "https://official-tickets.roadtoqatar.qa/qatar-football-festival/select/2742971?viewCode=Vista_Principal";
+const URL = "https://official-tickets.roadtoqatar.qa/qatar-football-festival/select/2742971";
 
-let lastContent = "";
+let lastPage = "";
 
-async function checkTickets() {
+async function checkPage() {
   try {
     const res = await axios.get(URL);
-    const currentContent = res.data;
+    const currentPage = res.data;
 
-    // نقارن بين نسخة الصفحة القديمة والجديدة
-    if (lastContent && currentContent !== lastContent) {
+    // إذا هذه أول مرة → نحفظ الصفحة بدون إرسال
+    if (!lastPage) {
+      lastPage = currentPage;
+      return;
+    }
+
+    // إذا صار اختلاف → أرسل إشعار
+    if (currentPage !== lastPage) {
       await axios.get(
         https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=🔥🔥 حصل تغيير في صفحة التذاكر!
       );
+
       console.log("✅ تم اكتشاف تغيير وإرسال إشعار");
+      lastPage = currentPage;
     }
 
-    lastContent = currentContent;
-
-  } catch (err) {
-    console.log("❌ خطأ في الفحص");
+  } catch (error) {
+    console.log("❌ خطأ في فحص الصفحة");
   }
 }
 
-setInterval(checkTickets, 20000);
+setInterval(checkPage, 15000); // يفحص كل 15 ثانية
